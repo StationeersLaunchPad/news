@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NewsFeed>
+  <Entry id="modular-consoles-workshop-migration" type="migration_needed" severity="critical" heading="Modular Consoles – Migration Required">
+    <short_description>A letter from WIKUS</short_description>
+    <long_description>
+[h1]The original Modular Consoles Mod is no longer maintained[/h1]
+
+Tom_is_unlucky, the original developer of [cyan]Modular Consoles[/cyan], has been unreachable for some time.
+I don't know the details, and I wish him well - but in his absence,
+the mod has broken on the current game version and there is no way for me to
+push fixes to Tom's Workshop entry.
+
+I have taken over maintenance of the mod under my own Workshop page.
+The new version is up to date, actively maintained,
+and a drop-in replacement for the original.
+
+Clicking [yellow]Migrate[/yellow] below will automatically unsubscribe you from the old version
+and subscribe you to the maintained version on my (WIKUS's) workshop.
+[green]Your saves are safe.[/green]
+
+[yellow] Note: If you want to keep using the old version because you play on an older release branch, click ignore. [/yellow]
+
+- [b]Wikus with a little help from JacksonTheMaster, Aproposmath and Inaki[/b]
+    </long_description>
+    <Trigger match_type="workshop_id" workshop_id="3505169479" />
+    <Actions>
+      <Primary label="Migrate Mod" action="workshop_mod_install" workshop_id="3452651592" />
+      <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3452651592" />
+    </Actions>
+  </Entry>
+  <Entry id="libconstruct-workshop-migration" type="migration_needed" severity="critical" heading="LibConstruct – Migration Required">
+    <short_description>(companion library)</short_description>
+    <long_description>
+[h1]The original LibConstruct Mod is no longer maintained[/h1]
+
+But wait - what even is LibConstruct?
+[cyan]LibConstruct[/cyan] is a shared library that [cyan]Modular Consoles[/cyan] and some other mods depends on.
+It was authored by Tom_is_unlucky, who has been unreachable for some time.  
+We don't know the details, and we wish him well - but in his absence,
+the mod has broken on the current game version and there is no way for us to push fixes to
+Toms Workshop. 
+
+Just like Modular Consoles, we've published a maintained version under 
+WIKUS's Workshop page. Clicking [yellow]Migrate[/yellow] below will unsubscribe you from 
+the old Mod and subscribe you to the working one automatically.
+
+[yellow] Note: If you want to keep using the old version because you play on an older release branch, click ignore. [/yellow]
+
+- [b]Wikus with a little help from JacksonTheMaster, Aproposmath and Inaki[/b]
+    </long_description>
+    <Trigger match_type="workshop_id" workshop_id="3505115682" />
+    <Actions>
+      <Primary label="Migrate Mod" action="workshop_mod_install" workshop_id="3328065049" />
+      <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3328065049" />
+    </Actions>
+  </Entry>
+</NewsFeed>
