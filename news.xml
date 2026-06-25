@@ -42,20 +42,20 @@ We don't know the details, and we wish him well - but in his absence,
 the mod has broken on the current game version and there is no way for us to push fixes to
 Toms Workshop. 
 
-Just like Modular Consoles, we've published a maintained version under 
-WIKUS's Workshop page. Clicking [yellow]Migrate[/yellow] below will unsubscribe you from 
-the old Mod and subscribe you to the working one automatically.
+Just like Modular Consoles, we've published a new and maintained version - on JacksonsTheMasters Workshop. 
+Clicking [yellow]Migrate[/yellow] below will unsubscribe you from 
+the old Mod and subscribe you to the [cyan]LibConstructReloaded[/cyan] mod automatically.
 
 [yellow] Note: [/yellow]
 [yellow] If you want to keep using the old version because you play on an older release branch, [/yellow]
 [yellow] click ignore below instead. [/yellow]
 
-~ [b]Wikus with a little help from JacksonTheMaster, Aproposmath and Inaki[/b]
+~ [b]JacksonTheMaster, Aproposmath and WIKUS[/b]
     </long_description>
     <Trigger match_type="workshop_id" workshop_id="3505115682" />
     <Actions>
-      <Primary label="Migrate" action="workshop_mod_install" workshop_id="3328065049" />
-      <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3328065049" />
+      <Primary label="Migrate" action="workshop_mod_install" workshop_id="3751750326" />
+      <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3751750326" />
     </Actions>
   </Entry>
 </NewsFeed>
