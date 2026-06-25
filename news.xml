@@ -12,15 +12,17 @@ push fixes to Tom's Workshop entry.
 
 I have taken over maintenance of the mod under my own Workshop page.
 The new version is up to date, actively maintained,
-and a drop-in replacement for the original.
+and [green] a drop-in replacement for the original.[/green]
 
 Clicking [yellow]Migrate[/yellow] below will automatically unsubscribe you from the old version
 and subscribe you to the maintained version on my (WIKUS's) workshop.
 [green]Your saves are safe.[/green]
 
-[yellow] Note: If you want to keep using the old version because you play on an older release branch, click ignore. [/yellow]
+[yellow] Note: [/yellow]
+[yellow] If you want to keep using the old version because you play on an older release branch, [/yellow]
+[yellow] click ignore below instead. [/yellow]
 
-- [b]Wikus with a little help from JacksonTheMaster, Aproposmath and Inaki[/b]
+~ [b]Wikus with a little help from JacksonTheMaster, Aproposmath and Inaki[/b]
     </long_description>
     <Trigger match_type="workshop_id" workshop_id="3505169479" />
     <Actions>
@@ -44,9 +46,11 @@ Just like Modular Consoles, we've published a maintained version under
 WIKUS's Workshop page. Clicking [yellow]Migrate[/yellow] below will unsubscribe you from 
 the old Mod and subscribe you to the working one automatically.
 
-[yellow] Note: If you want to keep using the old version because you play on an older release branch, click ignore. [/yellow]
+[yellow] Note: [/yellow]
+[yellow] If you want to keep using the old version because you play on an older release branch, [/yellow]
+[yellow] click ignore below instead. [/yellow]
 
-- [b]Wikus with a little help from JacksonTheMaster, Aproposmath and Inaki[/b]
+~ [b]Wikus with a little help from JacksonTheMaster, Aproposmath and Inaki[/b]
     </long_description>
     <Trigger match_type="workshop_id" workshop_id="3505115682" />
     <Actions>
