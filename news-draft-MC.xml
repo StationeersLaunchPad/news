@@ -25,8 +25,8 @@ and subscribe you to the maintained version on my (WIKUS's) workshop.
     </long_description>
     <Trigger match_type="workshop_id" workshop_id="3505169479" />
     <Actions>
-      <Primary label="Migrate" action="workshop_mod_install" workshop_id="3452651592" />
-      <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3452651592" />
+      <Primary label="Migrate" action="workshop_mod_install" workshop_id="3755414853" />
+      <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3755414853" />
     </Actions>
   </Entry>
   <Entry id="libconstruct-workshop-migration" type="migration_needed" severity="critical" heading="LibConstruct – Migration Required">
