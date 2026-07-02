@@ -57,17 +57,6 @@ the old Mod and subscribe you to the [cyan]LibConstructReloaded[/cyan] mod autom
       <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3751750326" />
     </Actions>
   </Entry>
-  <Entry id="update-underway-monorail-2026-07-02" 
-         type="info" 
-         severity="info"
-         heading="Monorail Update underway">
-    <short_description>-Today, i promise </short_description>
-    <long_description>I am preparing the Update. Expierencing some technical difficulties, sorry bout that. ~Jackson</long_description>
-    <Trigger match_type="workshop_id" workshop_id="3700849245" />
-    <Actions>
-      <Primary label="OK" action="acknowledge" />
-    </Actions>
-  </Entry>
   <Entry id="sanitation-update-mod-breakage-2026-07" 
          type="info" 
          severity="warning"
