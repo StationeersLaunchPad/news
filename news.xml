@@ -92,5 +92,53 @@ Thank you!
       <Secondary label="Open Discord" action="open_url" url="https://discord.gg/ZvrrHCUSgm" />
     </Actions>
   </Entry>
+  <Entry id="revolt-2026-07-02" 
+         type="info" 
+         severity="warning"
+         heading="Re-Volt broken">
+    <short_description>please standby</short_description>
+    <long_description>The Re-Volt Mod is currently broken on the latest stable version. Please standby.
+    
+    [yellow] Note: [/yellow]
+    [yellow] You could switch to the previous branch in your steam settings to play your saves with this mod. [/yellow]
+
+    </long_description>
+    <Trigger match_type="workshop_id" workshop_id="3587239682" />
+    <Actions>
+      <Primary label="OK" action="acknowledge" />
+    </Actions>
+  </Entry>
+  <Entry id="suitdrinksys-2026-07-02" 
+         type="info" 
+         severity="warning"
+         heading="Marky's Suit Drink System broken">
+    <short_description>please standby</short_description>
+    <long_description>The Marky's Suit Drink System Mod is currently broken on the latest stable version. Please standby.
+    
+    [yellow] Note: [/yellow]
+    [yellow] You could switch to the previous branch in your steam settings to play your saves with this mod. [/yellow]
+
+    </long_description>
+    <Trigger match_type="workshop_id" workshop_id="3644610659" />
+    <Actions>
+      <Primary label="OK" action="acknowledge" />
+    </Actions>
+  </Entry>
+    <Entry id="dataconnector-2026-07-02" 
+         type="info" 
+         severity="warning"
+         heading="DataNetworkConnector is broken">
+    <short_description>please standby</short_description>
+    <long_description>The DataNetworkConnector Mod is currently broken on the latest stable version.
+    
+    [yellow] Note: [/yellow]
+    [yellow] You could switch to the previous branch in your steam settings to play your saves with this mod. [/yellow]
+
+    </long_description>
+    <Trigger match_type="workshop_id" workshop_id="3547208483" />
+    <Actions>
+      <Primary label="OK" action="acknowledge" />
+    </Actions>
+  </Entry>
   
 </NewsFeed>
