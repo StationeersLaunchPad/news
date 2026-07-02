@@ -57,4 +57,57 @@ the old Mod and subscribe you to the [cyan]LibConstructReloaded[/cyan] mod autom
       <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3751750326" />
     </Actions>
   </Entry>
+  <Entry id="update-underway-monorail-2026-07-02" 
+         type="info" 
+         severity="info"
+         heading="Monorail Update underway">
+    <short_description>ETA 1-2 hours</short_description>
+    <long_description>I am preparing the Update, ETA 1-2 hours. Had some technical difficulties.</long_description>
+    <Trigger match_type="workshop_id" workshop_id="3700849245" />
+    <Actions>
+      <Primary label="OK" action="acknowledge" />
+    </Actions>
+  </Entry>
+  <Entry id="scripted-screens-2026-07-02" 
+         type="info" 
+         severity="warning"
+         heading="Scripted Screens broken">
+    <short_description>please standby</short_description>
+    <long_description>The Scripted screens Mod is currently broken on the latest stable version. You will not be able to load your saves without if you have used Mod prefabs. 
+    Please standby.
+    
+    [yellow] Note: [/yellow]
+    [yellow] You could switch to the previous branch in your steam settings to play your saves. [/yellow]
+
+    </long_description>
+    <Trigger match_type="workshop_id" workshop_id="3666779631" />
+    <Actions>
+      <Primary label="OK" action="acknowledge" />
+    </Actions>
+  </Entry>
+  <Entry id="sanitation-update-mod-breakage-2026-07" 
+         type="info" 
+         severity="warning"
+         heading="Sanitation Update">
+    <short_description>Your Mods May Be Broken</short_description>
+    <long_description>
+[h2]The sanitation update broke a bunch of mods[/h2]
+
+The recent basegame update has broken compatibility for some Workshop mods.
+
+If you are running mods that are no longer working:
+      
+Please let the mod author(s) know on the [url=https://discord.gg/ZvrrHCUSgm]Modding Discord[/url].
+
+This helps modders identify and fix issues faster.
+
+Thank you!
+    </long_description>
+    <Trigger match_type="always" />
+    <Actions>
+      <Primary label="OK" action="acknowledge" />
+      <Secondary label="Open Discord" action="open_url" url="https://discord.gg/ZvrrHCUSgm" />
+    </Actions>
+  </Entry>
+  
 </NewsFeed>
