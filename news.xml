@@ -89,12 +89,14 @@ Thank you!
     <long_description>The Marky's Suit Drink System Mod is currently broken on the latest stable version. Please standby.
     
     [yellow] Note: [/yellow]
-    [yellow] You could switch to the previous branch in your steam settings to play your saves with this mod. [/yellow]
+    [yellow] SixFive7 has made a temporary compatibility patch that restores Marky's Suit Drink System to working order on the current build of Stationeers.  [/yellow]
+    [yellow] Click the "Open Workshop" Button below to view this ModMod [/yellow]
 
     </long_description>
     <Trigger match_type="workshop_id" workshop_id="3644610659" />
     <Actions>
       <Primary label="OK" action="acknowledge" />
+      <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3759105192" />
     </Actions>
   </Entry>
     <Entry id="dataconnector-2026-07-02" 
