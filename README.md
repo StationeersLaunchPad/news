@@ -1,184 +1,183 @@
-# SLP'S News & Migration System
+# SLP News & Migration System
 
-StationeersLaunchPad (from version 0.4.0 onwards!) can fetch a remote XML feed on launch and show notices to players.
-This can primarily used to warn about broken Workshop mods and offer migration paths to a new version. 
-It is also possible to add simple Info notices in case something with SLP breaks and informing the users is needed.
+StationeersLaunchPad (version 0.4.0 and later) can fetch a remote XML feed on launch and show notices to players. Notices can report general information, warn about broken Workshop mods, offer migrations, or let users subscribe to an additional Workshop item.
 
 ## Feed location
 
-- Default URL (could be overridden in the BepInEx config under the "News" section):
-  `https://raw.githubusercontent.com/StationeersLaunchPad/news/main/news.xml`
-- The feed is fetched fresh every launch (NO caching).
-- On servers or when `NewsCheckOnStart` is false, the system is skipped entirely.
-- If the URL is left empty in config, the built-in default is used
+- Default URL (overridable in the BepInEx config under `News`): `https://raw.githubusercontent.com/StationeersLaunchPad/news/main/news.xml`
+- The feed is fetched on every launch; it is not cached.
+- The system is skipped on servers and when `NewsCheckOnStart` is false.
+- If the configured URL is empty, the built-in default is used.
 
-## XML structure
+## Complete example
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <NewsFeed>
   <Entry id="unique-id" type="migration_needed" severity="critical"
          heading="Short title shown to the user">
-    <short_description>One-liner shown in the list view.</short_description>
-    <long_description>Full text shown in the detail view.
-Can contain newlines and the usual formatting tags:
+    <short_description>One-line summary shown in the notice list.</short_description>
+    <long_description>Full text shown in the detail view.</long_description>
 
-[b]bold[/b]                        (larger text only, no true bold font)
-[i]italic[/i]                      (no visible effect - italic font not supported)
-[u]underline[/u]
-[strike]strikethrough[/strike]
-[h1]Big header[/h1]
-[h2]Medium header[/h2]
-[h3]Small header[/h3]
-[url=https://example.com]Clickable link[/url]
-[code]monospace block[/code]
-
-[red]red text[/red]
-[green]green text[/green]
-[blue]blue text[/blue]
-[yellow]yellow text[/yellow]
-[cyan]cyan text[/cyan]
-
-[list]
-[*] bullet one
-[*] bullet two
-[/list]
-</long_description>
-
-    <Trigger match_type="workshop_id" workshop_id="3505169479" />
-    <!-- or: match_type="workshop_id_and_version" workshop_id="..." version_below="1.2.3" -->
-    <!-- or: match_type="mod_name_and_version" mod_name="Exact Name" version_below="..." -->
-    <!-- or: match_type="always"   (unconditional, great for testing) -->
+    <Trigger match_type="workshop_id"
+             workshop_id="3505169479"
+             unless_workshop_id="1234567890" />
 
     <Actions>
-      <Primary label="Migrate Automatically"
+      <Primary label="Migrate automatically"
                action="repo_mod_install"
                url="https://raw.githubusercontent.com/Org/Repo/refs/heads/modrepo/modrepo.xml"
                modid="the-mod-id-to-install" />
-
-      <!-- Or for Workshop-based replacements: -->
-      <!-- <Primary label="Migrate" action="workshop_mod_install" workshop_id="12345678901234567" /> -->
-
       <Secondary label="View on GitHub"
                  action="open_url"
                  url="https://github.com/Org/Repo" />
     </Actions>
   </Entry>
-
-  <!-- more Entry elements ... -->
 </NewsFeed>
 ```
 
-## Formatting tag gotchas
-
-- `[b]` - renders at 1.15× scale. There is no bold font loaded / shipped, so text is larger but not heavier.
-- `[i]` - has no proper visible effect. Italic rendering requires a separate italic font to be registered; none is currently loaded / shipped.
+Use [notices-builder.html](notices-builder.html) to build entries using a simple form and copy or download the resulting XML.
 
 ## Entry fields
 
-| Attribute / Element     | Required | Description |
-|-------------------------|----------|-------------|
-| `id`                    | yes      | Unique stable identifier. Used for dismissal persistence. |
-| `type`                  | yes      | `info`, `warning`, `critical`, `migration_needed`, or `mod_broken`. |
-| `severity`              | yes      | `info`, `warning`, or `critical` (affects color and urgency). |
-| `heading`               | yes      | Title shown in the popup. |
-| `short_description`     | yes      | One-line summary shown in the list when multiple notices exist. |
-| `long_description`      | yes      | Full body text (supports the formatting tags listed above). |
-| `Trigger`               | yes      | See below. |
-| `Actions` / `Primary`   | no       | Main button (usually the migration or "OK" action). |
-| `Actions` / `Secondary` | no       | Optional second button. |
+| Attribute / element | Required | Description |
+|---|---:|---|
+| `id` | yes | Unique stable identifier used for dismissal persistence. |
+| `type` | yes | `info`, `warning`, `critical`, `migration_needed`, or `mod_broken`. |
+| `severity` | yes | `info`, `warning`, or `critical`; controls color and urgency. |
+| `heading` | yes | Title shown in the popup. |
+| `short_description` | yes | One-line summary shown when multiple notices exist. |
+| `long_description` | yes | Full notice body; supports the formatting tags below. |
+| `Trigger` | yes | Determines when the notice is shown. |
+| `Actions` / `Primary` | no | Main button. |
+| `Actions` / `Secondary` | no | Optional second button. |
 
 ## Trigger matching
 
-Only **enabled** mods at load time are considered.
+Only enabled mods are considered when matching a mod trigger.
 
-Supported `match_type` values:
+| `match_type` | Required attributes | Behavior |
+|---|---|---|
+| `workshop_id` | `workshop_id` | Matches any version of the Workshop item. |
+| `workshop_id_and_version` | `workshop_id`, `version_below` | Matches when the installed version is below the specified version. |
+| `mod_name_and_version` | `mod_name`, `version_below` | Matches the exact mod name (case-insensitive) below the specified version. |
+| `always` | none | Always matches; useful for announcements and testing. |
 
-- `workshop_id` - matches any version of the given Workshop item.
-- `workshop_id_and_version` - matches only if the installed version is **below** `version_below`.
-- `mod_name_and_version` - matches by exact `mod_name` (case-insensitive) and version below.
-- `always` - always matches (useful for showcase / testing feeds).
+Version checks use SLP's normal `Version.Compare` logic. A mod with no version also matches a `version_below` trigger.
 
-Version comparison uses the same semver logic as the rest of SLP (`Version.Compare`).
+### Hide when a Workshop item is installed
 
-If a notice is a `migration_needed` or `mod_broken` **and** its primary action is a `repo_mod_install` or `workshop_mod_install`, the system will also check whether the target `modID` / `workshopID` is already installed. If so, the notice is skipped silently assuming the user knows what they are doing / to not interfere with manual migrations.
+Every trigger can include the optional `unless_workshop_id` attribute:
+
+```xml
+<Trigger match_type="always" unless_workshop_id="1234567890" />
+```
+
+The notice is skipped when that Workshop item is already installed. This is useful for announcements or optional dependencies where the notice should disappear as soon as the user has the relevant item. The exclusion checks all discovered mods, not only enabled mods.
+
+Migration notices (`migration_needed` and `mod_broken`) also have an automatic replacement check when their primary action is `repo_mod_install` or `workshop_mod_install`. They are hidden when that primary replacement is already installed. Use `unless_workshop_id` when you need the same behavior independently of notice type or action placement.
 
 ## Actions
+
+Both `<Primary>` and `<Secondary>` accept `label` and `action`. Action-specific attributes are shown below.
 
 ### `repo_mod_install`
 
 ```xml
 <Primary label="Migrate" action="repo_mod_install"
-         url="https://.../modrepo.xml" modid="the-mod-id" />
+         url="https://example.com/modrepo.xml" modid="the-mod-id" />
 ```
 
-- If the `url` points at a GitHub repo root, SLP normalizes it to the usual `refs/heads/modrepo/modrepo.xml`.
-- The repo is added (if not already present).
-- The exact `modid` is installed using the normal ModRepos pipeline (latest compatible version).
-- After a migration action (repo or workshop) completes, a prominent success/failure result is shown in the detail view. The user clicks "Close" to remove the notice for the current session (it will not re-appear unless the replacement is removed again). Failures keep the notice open so the user can retry or ignore.
+- Supported on the primary button.
+- Adds the repository if necessary and installs the requested `modid` through the normal ModRepos pipeline.
+- If `modid` is omitted, SLP falls back to the first mod in the repository.
+- A GitHub repository-root URL is normalized to its usual `refs/heads/modrepo/modrepo.xml` location.
+- The detail view reports success or failure clearly. Failures leave the notice open for retrying or ignoring.
 
 ### `workshop_mod_install`
 
 ```xml
-<Primary label="Migrate" action="workshop_mod_install" workshop_id="12345678901234567" />
+<Primary label="Replace mod" action="workshop_mod_install"
+         workshop_id="1234567890" />
 ```
 
-- Subscribes the user to the given Steam Workshop item (by its published file id) and waits for download to complete.
-- If the triggering `<Trigger>` matched via `workshop_id`, the old (broken) workshop item is unsubscribed after the new one succeeds.
-- Workshop subscriptions are handled directly via the Steamworks UGC API
-- New workshop mods discovered after the action are automatically enabled (standard "new mod" behavior).
-- The "already migrated" check skips the notice if the target `workshop_id` is already subscribed.
-- After a successful install the news notice shows a result banner; the user must click "Close" to ack.
+- Supported on the primary button and intended for migrations.
+- Subscribes to and downloads the target item.
+- If the trigger contains a valid `workshop_id`, the triggering Workshop item is unsubscribed only after the replacement succeeds.
+- Newly discovered Workshop mods are automatically enabled through SLP's normal new-mod behavior.
+- The detail view reports success or failure clearly.
+
+### `workshop_mod_subscribe`
+
+```xml
+<Secondary label="Install dependency" action="workshop_mod_subscribe"
+           workshop_id="1234567890" />
+```
+
+- Supported on either the primary or secondary button.
+- Subscribes to and downloads the item without uninstalling the mod that triggered the notice.
+- Shows clear success or failure feedback in the detail view.
+- Combine it with `unless_workshop_id` using the same ID to hide the notice on later launches once the item is installed.
 
 ### `open_url`
 
 ```xml
-<Secondary label="More info" action="open_url" url="https://..." />
+<Secondary label="More info" action="open_url" url="https://example.com" />
 ```
 
-Opens the URL in the user's browser. The notice remains visible (useful for "view details" buttons).
+Opens the URL in the user's browser. The notice remains visible.
 
-## Ignoring notices
+### `acknowledge` and `dismiss`
 
-- Every notice has an **Ignore** button.
-- Ignores are stored permanently in the BepInEx config under `NewsDismissedIds` (comma-separated list of IDs).
-- `info` notices can also be auto-acknowledged after 10 seconds; they are **not** added to the dismissed list.
+```xml
+<Primary label="OK" action="acknowledge" />
+```
 
-## Testing / showcase feeds
+Both actions close the notice for the current session. An empty action is treated the same way. They do not add the notice ID to the permanent ignored list.
 
-A minimal always-on feed for testing the UI looks like this:
+## Formatting tags
+
+`long_description` supports:
+
+- `[b]...[/b]`, `[i]...[/i]`, `[u]...[/u]`, and `[strike]...[/strike]`
+- `[h1]...[/h1]`, `[h2]...[/h2]`, and `[h3]...[/h3]`
+- `[url=https://example.com]link text[/url]`
+- `[code]...[/code]`
+- `[red]`, `[green]`, `[blue]`, `[yellow]`, and `[cyan]`
+- `[list]` with `[*]` list items
+
+`[b]` renders at 1.15× scale because no bold font is shipped. `[i]` currently has no visible effect because no italic font is registered.
+
+XML-special characters in text or attributes must be escaped: use `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&apos;`. The HTML builder handles this automatically.
+
+## Ignoring and completion
+
+- Every notice has an **Ignore** button. Ignored IDs are stored permanently in `NewsDismissedIds` in the BepInEx config.
+- `info` notices can auto-acknowledge after 10 seconds and are not permanently dismissed by that timer.
+- Successful install/subscribe actions show a result and a **Close** button. Failures keep the notice available.
+- All notice types except `info` block loading until handled.
+
+## Minimal testing feed
 
 ```xml
 <NewsFeed>
-  <Entry id="test-info" type="info" severity="info"
-         heading="Info notice">
-    <short_description>Auto-dismiss demo</short_description>
-    <long_description>This will disappear after 10 seconds.</long_description>
-    <Trigger match_type="always" />
-  </Entry>
-
-  <Entry id="test-migration" type="migration_needed" severity="critical"
-         heading="Migration demo">
-    <short_description>Click to test repo install</short_description>
-    <long_description>Primary button will add a repo and install a mod.</long_description>
-    <Trigger match_type="always" />
+  <Entry id="test-subscribe" type="info" severity="info" heading="Optional Workshop item">
+    <short_description>Install an optional item.</short_description>
+    <long_description>This notice hides once the item is installed.</long_description>
+    <Trigger match_type="always" unless_workshop_id="1234567890" />
     <Actions>
-      <Primary label="Install test mod" action="repo_mod_install"
-               url="https://raw.githubusercontent.com/StationeersCommunityMods/Manifest/refs/heads/modrepo/modrepo.xml"
-               modid="LibConstruct" />
+      <Primary label="Subscribe and download" action="workshop_mod_subscribe"
+               workshop_id="1234567890" />
+      <Secondary label="More info" action="open_url"
+                 url="https://steamcommunity.com/sharedfiles/filedetails/?id=1234567890" />
     </Actions>
   </Entry>
 </NewsFeed>
 ```
 
-## Implementation notes / how the system is leveraged
+## Implementation notes
 
-- News data loading is driven from the normal mod search path
-- `NewsRunner.GetActiveNotices(ModList)` is the main entrypoint that fetches + matches against the current enabled mods.
-- The notice UI is shown (with `LoadStage.News` for status) after the mod list is built but before the autoload countdown.
-- After a successful mod install, the in-memory mod list is refreshed immediately so the new repo mod appears before configuration.
-- All notices are blocking except `info` (10 s timer).
-- The system is completely server-safe (skipped when `Platform.IsServer`).
-- We can have any number of entries; the UI shows a list when more than one is active.
-
-This gives maintainers a lightweight way to steer players away from broken Workshop content and generally inform users if something is happening they should know about.
+- `NewsRunner.GetActiveNotices(ModList)` fetches and matches notices after the mod list is built and before the autoload countdown.
+- The system is skipped when `Platform.IsServer` is true.
+- Any number of entries is supported; the UI shows a list when multiple entries are active.
+- After a successful repo install, the in-memory mod list is refreshed before configuration continues.
