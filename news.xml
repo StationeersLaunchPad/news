@@ -57,13 +57,9 @@ the old Mod and subscribe you to the [cyan]LibConstructReloaded[/cyan] mod autom
       <Secondary label="Open Workshop" action="open_url" url="https://steamcommunity.com/sharedfiles/filedetails/?id=3751750326" />
     </Actions>
   </Entry>
-  <Entry id="sanitation-update-mod-breakage-2026-07" 
-         type="info" 
-         severity="warning"
-         heading="Sanitation Update">
+  <Entry id="power-line-update-mod-breakage-2026-08" type="info" severity="warning" heading="Power Line Update">
     <short_description>Your Mods May Be Broken</short_description>
-    <long_description>
-[h2]The sanitation update broke a bunch of mods[/h2]
+    <long_description>[h2]The newest Stationeers update caused some mods to break[/h2]
 
 The recent basegame update has broken compatibility for some Workshop mods.
 
@@ -71,10 +67,12 @@ If you are running mods that are no longer working:
       
 Please let the mod author(s) know on the [url=https://discord.gg/ZvrrHCUSgm]Modding Discord[/url].
 
+    [yellow] Note: [/yellow]
+    [yellow] You can switch to the previous branch in your steam Stationeers settings to play on the previous release.[/yellow]
+
 This helps modders identify and fix issues faster.
 
-Thank you!
-    </long_description>
+Thank you!</long_description>
     <Trigger match_type="always" />
     <Actions>
       <Primary label="OK" action="acknowledge" />
